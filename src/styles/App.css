@@ -1,0 +1,562 @@
+/*--------------------HEADER------------*/
+
+body {
+    margin: 0px;
+}
+
+ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+*{
+font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.xForce {
+    opacity: 1;
+    background-color: #8b2323;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    color: #FFFFFF;
+    align-content: center;
+    font-weight: 700;
+    font-size: 116x;
+    align-items: center;
+
+}
+
+.xForce a{
+    color: white;
+    text-decoration-line: none;
+}
+
+#logo {
+    font-size: 40px;
+    font-weight: 700;
+    opacity: 1;
+    margin-left: 10px;
+}
+
+.botonForce {
+    display: flex;
+    cursor: pointer;
+}
+
+.botonForce:hover {
+    text-decoration-line: underline;
+}
+
+.botonSalir {
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    border-radius: 10px;
+    opacity: 1;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 5px;
+    background-color: #8b1a1a;
+    height: 38px;
+    width: 80px;
+    cursor: pointer;
+    align-content: center;
+    margin-top:7px;
+    margin-right: 10px;
+}
+
+.botonSalir:hover {
+    color: #8b1a1a;
+    background-color: #ffffff;
+}
+
+/*------------FOOTER--------------*/
+.footer {
+    color: #13171B;
+    font-size: 12px;
+    position: fixed;
+    bottom: 0%;
+    left: 1%;
+    opacity: 1;
+    background-color: #ffffff;
+    padding: 10px;
+  
+  }
+  
+/*------------Login - Registro usuarios ------------*/
+
+.container{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100px;
+  }
+
+  .divlogo{
+    padding-top: 14rem;
+    background-color: #8b1a1a;
+    color:white;
+    justify-items: center;
+
+  }
+  .divlogo > h1{
+    text-align: center;
+    font-size: 5em;
+  }
+
+  .divlogin{
+    background-color: #8b1a1a;
+    color:white;
+    padding-left: 50px;
+    padding: 75px;
+  }
+
+  .divlogin > h1{
+    text-align: left;
+    font-size: 2.5em;
+  }
+
+  .botonlogin{
+    background-color: #F99225;
+    border: none;
+    color: white;
+    margin-top: 2rem;
+    border-radius: 3px;
+    height: 4em;
+    width: 16em;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .divinternologo{
+    display: flex;
+    justify-content: center;
+  }
+
+  .divinternopiedepagina{
+    font-size: 12px;
+    margin-top: 20rem;
+    margin-left: 1rem;
+
+  }
+
+  .auth{
+    font-size: 15px;
+    padding-inline-end: 2em;
+  }
+
+  .register{
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bolder;
+    padding-inline-end: 2em;
+  }
+
+  .register:hover{
+      text-decoration: underline;
+  }
+
+  .g_id_signin{
+    padding-top: 2rem;
+    max-width: 17rem;
+  }
+
+/*--------Tabla usuarios--------*/
+
+.usersTable {
+    table-layout: fixed;
+    width: auto;
+    margin-right: 4.4em;
+    border: 1px solid #ACB1B2;
+    border-collapse: collapse;
+}
+
+.usersTable th{
+    white-space:nowrap;
+}
+
+/*------------ Estilos Solo Tabla Proyectos --------------*/
+
+.proyectTable{
+    margin-top: 1em;
+    margin-left: 4.4em;
+    margin-bottom: 4rem;
+}
+
+table {
+    table-layout: fixed;
+    width: 98%;
+    border: 1px solid #ACB1B2;
+    border-collapse: collapse;
+}
+
+
+caption {
+    font-size: 16px;
+    font-weight: 700;
+    caption-side: top;
+    color:#8b1a1a;
+    text-align: left;
+    padding-bottom: 0.5em;
+}
+
+thead th, tfoot th {
+    font-size: 14px;
+    font-weight: 700;
+    color:#4D4D4D;
+    text-align: left;
+    ;
+}
+
+thead, tfoot {
+    background-color: #F0F2F4;
+}
+
+thead th:nth-child(1) {
+    width: 20%;
+}
+
+thead th:nth-child(2) {
+    width: 20%;
+}
+
+thead th:nth-child(3) {
+    width: 20%;
+}
+
+thead th:nth-child(4) {
+    width: 20%;
+}
+
+thead th:nth-child(5) {
+    width: 12%;
+}
+
+th, td {
+    padding: 14px;
+}
+
+td {
+    color:#4D4D4D;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+tbody tr:hover {
+    background-color: #f8f9fa;
+    cursor: default;
+}
+
+tbody td {
+    text-align: left;
+}
+
+.badgeAvailable {
+    border-radius: 10px;
+    border: 1px solid #00B20E;
+    font-size: 13px;
+    font-weight: 600;
+    color:#009c0d;
+    padding: 6px;
+}
+
+.badgeNotAvailable {
+    border-radius: 10px;
+    border: 1px solid #c01515;
+    font-size: 13px;
+    font-weight: 600;
+    color:#ce2323;
+    padding: 6px;
+}
+
+.badgeInProgress {
+    border-radius: 10px;
+    border: 1px solid #f89b22;
+    font-size: 13px;
+    font-weight: 600;
+    color:#f89b22;
+    padding: 6px;
+}
+
+.editButton {
+    background-color: #8b1a1a;
+    font-weight: 600;
+    font-size: 4px;
+    color: white;
+    border: 0px;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 32px;
+    width: 60px;
+    text-align: center;
+}
+.editButton:hover {
+    background-color: #5e5e5e;
+}
+
+.checkButton {
+    background-color: #1BC628;
+    font-weight: 600;
+    font-size: 4px;
+    color: white;
+    border: 0px;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 32px;
+    width: 60px;
+    text-align: center;
+}
+.checkButton:hover {
+    background-color: #00ac00;
+}
+
+.cancelButton {
+    background-color: #8b1a1a;
+    font-weight: 600;
+    font-size: 4px;
+    color: white;
+    border: 0px;
+    border-radius: 10px;
+    cursor: pointer;
+    height: 32px;
+    width: 60px;
+    text-align: center;
+}
+.cancelButton:hover {
+    background-color: #5e5e5e;
+}
+.estilosCampos{
+    width: auto;
+    height: 40px;
+    font-size: 14px;
+    padding: 5px;
+    padding-left: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.campoLider{
+    width: auto;
+    height: 30px;
+    font-size: 14px;
+    padding: 5px;
+    padding-left: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#accion{
+    display: flex;
+    justify-content: left;
+}
+
+/*------------ Gestionar Productos --------------*/
+
+.textosInicioSeccion {
+    margin-top: 2.2em;
+    display: grid;
+    color:#13171B;
+    margin-left: 4.4em;
+
+}
+
+.tituloSeccion {
+    font-size: 33px;
+    font-weight: 800;
+    display: block;
+    color:#13171B;
+}
+
+.descripcionSeccion {
+    margin-top: 0.2em;
+    font-weight: 700;
+    font-size: 16px;
+    display: block;
+    color:#13171B;
+}
+
+/*------------ Gestionar Productos / Landing(Tabla) --------------*/
+
+.posicionBuscador {
+    margin-top: 3em;
+    margin-left: 4.6em;
+    display: inline-flex;
+}
+
+.buscar {
+    background-color: white;
+    border: 1px solid #ACB1B2;
+    padding: 4px;
+    border-radius: 10px;
+    height: 32px;
+    width: 310px;
+    font-size: 16px;
+    font-weight: 300;
+    color:#4D4D4D;
+}
+.buscar:focus-within {
+     border-radius: 10px;
+}
+.botonBuscar {
+    align-content: center;
+    align-items: center;
+    background-color: #2C90F4;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    border: 0px;
+    border-radius: 10px;
+    height: 42px;
+    width: 140px;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.botonBuscar:hover {
+    background-color: #0671DD
+}
+.botonCrear {
+    position: absolute;
+    top: 38%;
+    right: 4%;
+    background-color: #8b1a1a;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    border: 0px;
+    border-radius: 10px;
+    height: 42px;
+    width: 260px;
+    cursor: pointer;
+    right: 4.8em;
+    top: 15em;
+}
+
+.botonCrear:hover {
+    background-color: #8b1a1a
+}
+
+.botonCrear2 {  
+    position: absolute;
+    margin-top: 2em;
+    background-color: #8b1a1a;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    border: 0px;
+    border-radius: 10px;
+    height: 42px;
+    width: 260px;
+    cursor: pointer;
+    right: 8em;
+    top: 10em; 
+}
+
+.botonCrear2:hover {
+    background-color: #8b1a1a
+}
+
+
+
+
+
+
+/*------------ Gestionar Productos / Registrar Nuevos Productos --------------*/
+
+
+.contenedorFormulario {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    max-width: 600px;
+    margin-left: 3.1rem;
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+.label {
+    font-size: 14px;
+    font-weight: 400;
+    color:#686868;
+    padding-bottom: 0.6em;
+}
+
+input[type=text], select, textarea {
+    display: block;
+    font-size: 14px;
+    width: 40em;
+    height: 45px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    resize: vertical;
+    cursor: auto;
+}
+
+input[type=number], select, textarea {
+    font-size: 14px;
+    width: 40em;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    resize: vertical;
+    cursor: pointer;
+}
+
+input[type=submit] {
+    background-color: #1BC628;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    height: 42px;
+    width: 250px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #00ac00;
+}
+
+/*-------- Botón guardar y editar Formulario Producto--------*/
+
+.botonGuardarUsuario {
+    background-color: #B0300D;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    height: 42px;
+    width: 250px;
+    cursor: pointer;
+    margin-top: 0.5em;
+    }
+    
+.botonGuardarUsuario:hover {
+    background-color: #B0300D;
+}
+
+/*--------Tabla usuarios--------*/
+
+.usersTable {
+    table-layout: fixed;
+    width: auto;
+    margin-right: 4.4em;
+    border: 1px solid #ACB1B2;
+    border-collapse: collapse;
+}
+
+.usersTable th{
+    white-space:nowrap;
+}
