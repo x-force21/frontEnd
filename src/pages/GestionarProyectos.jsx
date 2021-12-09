@@ -20,7 +20,7 @@ const GestionarProyectos = () => {
         if (ejecutarConsulta) {
             obtenerProyectos((response) => {
                 console.log('la respuesta que se recibio fue', response);
-                setProyectos(response.data);
+                setProyectos(response.getProjects);
             },
             (error) => {
                 console.error('Salio un error:', error);
@@ -148,10 +148,10 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
     const [edit, setEdit] = useState(false);
     const [infoNuevoProyecto, setInfoNuevoProyecto] = useState(
         {
-        idProyecto: proyecto.idproyecto,
-        descripcion: proyecto.descripcion,
-        lider: proyecto.lider,
-        estado: proyecto.estado,
+            codigoProyecto: proyecto.codigoProyecto,
+            nombre: proyecto.nombre,
+            nombreLider: proyecto.nombreLider,
+            estadoProyecto: proyecto.estadoProyecto,
         }
     );
 
@@ -163,10 +163,10 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
         await editarProyectos(
             {    
                 _id: proyecto._id,
-                idProyecto: infoNuevoProyecto.idProyecto,
-                descripcion: infoNuevoProyecto.descripcion,
-                lider: infoNuevoProyecto.lider,
-                estado: infoNuevoProyecto.estado,
+                codigoProyecto: infoNuevoProyecto.codigoProyecto,
+                nombre: infoNuevoProyecto.nombre,
+                nombreLider: infoNuevoProyecto.nombreLider,
+                estadoProyecto: infoNuevoProyecto.estadoProyecto,
             },
             (response) => {
                 toast.success('Proyecto editado con éxito');
@@ -186,11 +186,11 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
         <tr>
             {edit ? (
             <>
-                <td>{infoNuevoProyecto.idProyecto}
+                <td>{infoNuevoProyecto.codigoProyecto}
                 </td>
                 <td>
                     <select name="descripcion" className="estilosCampos"
-                        defaultValue={infoNuevoProyecto.descripcion}
+                        defaultValue={infoNuevoProyecto.nombre}
                         onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, descripcion: e.target.value })}>
                         
                     </select>
@@ -198,7 +198,7 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
                 <td>
                     
                     <input name="lider" className="campoLider"
-                        defaultValue={infoNuevoProyecto.lider}
+                        defaultValue={infoNuevoProyecto.nombreLider}
                         //required
                         //controlar el componente con un solo estado (e = elemento que entra)
                         //(...)spread operator
@@ -208,7 +208,7 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
                 <td>
                     <select name="estado" className="estilosCampos"
                         //required
-                        defaultValue={infoNuevoProyecto.estado}
+                        defaultValue={infoNuevoProyecto.estadoProyecto}
                         onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, estado: e.target.value })}>
                         <option disabled value={0}> Selecciona un estado</option>
                         <option>Activo</option>
@@ -227,11 +227,11 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
                 </>
             ) : (
                 <>
-                <td>{proyecto.idProyecto}</td>
-                <td>{proyecto.descripcion}</td>
-                <td>{proyecto.lider}</td>
-                <td><label className={proyecto.estado==='Disponible' ? 'badgeAvailable':'badgeNotAvailable'}>
-                    {proyecto.estado}</label></td>
+                <td>{proyecto.codigoProyecto}</td>
+                <td>{proyecto.nombre}</td>
+                <td>{proyecto.nombreLider}</td>
+                <td><label className={proyecto.estadoProyecto==='Disponible' ? 'badgeAvailable':'badgeNotAvailable'}>
+                    {proyecto.estadoProyecto}</label></td>
                 <td><button className="editButton" onClick={() => setEdit(true)}>
                     <span className="material-icons">edit</span>
                     </button>
