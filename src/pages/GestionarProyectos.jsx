@@ -263,10 +263,10 @@ const RegistrarProyectos = ({ setMostrarTablaProyectos, listaProyectos, setProye
         //se define el método POST y la url 3001 (AQUÍ SE MUESTRAN DATOS)
         await registrarProyectos(
             {
-                idProyecto: nuevoProyecto.idProyecto,
-                descripcion: nuevoProyecto.descripcion,
+                codigoProyecto: nuevoProyecto.idProyecto,
+                nombre: nuevoProyecto.descripcion,
                 lider: nuevoProyecto.lider,
-                estado: nuevoProyecto.estado,
+                estadoProyecto: nuevoProyecto.estado,
             },
             (response) => {
               console.log(response.data);
@@ -301,18 +301,18 @@ const RegistrarProyectos = ({ setMostrarTablaProyectos, listaProyectos, setProye
                 </label>
             
                 <label htmlFor="descripcionProyecto">Descripción del Proyecto
-                <select name="descripcion" required defaultValue={0} ></select>
+                <input type= "text" name="descripcion"  ></input>
                 </label>
 
                 <label htmlFor="liderProyecto">lider Proyecto
-                <select name="lider" required defaultValue={0} ></select>
+                <input type= "text" name="lider" ></input>
                 </label>
             
                 <label htmlFor="estadoProyecto">Estado del Proyecto
                     <select name="estado" required defaultValue={0} >
                         <option disabled value={0}> Selecciona un estado</option>
-                        <option>Disponible</option>
-                        <option>No disponible</option>
+                        <option>Activo</option>
+                        <option>Inactivo</option>
                     </select>
                 </label>
                 <button type="submit" className="botonGuardarUsuario"> Guardar nuevo Proyecto

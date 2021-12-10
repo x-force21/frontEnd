@@ -1,5 +1,4 @@
 import axios from 'axios';
-//import { request, gql } from 'graphql-request'
 import { request, GraphQLClient } from 'graphql-request';
 
 /*-------Proyectos------*/
@@ -21,21 +20,44 @@ export const obtenerProyectos = async (successCallback, errorCallback) => {
     documentoLider
   }}
 `
-
-  //request('http://localhost:3001/api/obtenerProyectos', query).then((data) => console.log(data));
-//request('http://localhost:3001/api', query).then((data) => console.log(data))
 await request('http://localhost:3001/api', query).then(successCallback);
 
 };
 
 export const registrarProyectos = async (data, successCallback, errorCallback) => {
-  const options = {
-    method: 'POST',
-    url: 'http://localhost:3001/proyectos/create',
-    headers: { 'Content-Type': 'application/json' },
-    data,
-  };
-  await axios.request(options).then(successCallback).catch(errorCallback);
+  const mutation = `mutation
+  registerProject($projectInput:ProjectInput!){   
+    registerProject(input: $projectInput) {
+      _id
+      codigoProyecto
+      nombre
+      objGenerales
+      objEspecificos
+      presupuesto
+      fInicio
+      fFinal
+      estadoProyecto
+      fase
+    }
+  }`
+
+  let varInputProject =
+  {
+  "projectInput": {
+    "codigoProyecto": data.codigoProyecto,
+    "nombre": data.nombre,
+    "objGenerales": "mejorar cosas",
+    "objEspecificos": "mejorar una cosa",
+    "presupuesto": 80000,
+    "fInicio": "2021-12-01",
+    "fFinal": "2021-12-08",
+    "nombreLider": data.lider,
+    "documentoLider": "123456789",//data.documentoLider,
+    "estadoProyecto" : data.estadoProyecto
+  }
+}
+  
+  await request('http://localhost:3001/api', mutation, varInputProject).then(successCallback);
 };
 
 export const editarProyectos = async ( data, successCallback, errorCallback) => {
