@@ -112,13 +112,13 @@ const TablaProyectos = ({ listaProyectos, setEjecutarConsulta }) => {
                         <caption></caption>
                             <thead>
                             <tr>
-                                <th scope="col">ID Proyecto</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Lider</th>
-                                <th scope="col">Descripción</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Acción</th>
-                                <th></th>
+                                <th scope="col" className="estilo-id-proy">ID Proyecto</th>
+                                <th scope="col" className="estilosCampo2">Nombre</th>
+                                <th scope="col" className="estilosCampo2">Lider</th>
+                                <th scope="col" className="estado">Estado</th>
+                                <th scope="col" className="estado">Fase</th>
+                                <th scope="col" className="acciones">Acción</th>
+                                <th className="acciones"></th>
                             </tr>
                             </thead>
                         <tbody>
@@ -152,6 +152,7 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
             nombre: proyecto.nombre,
             nombreLider: proyecto.nombreLider,
             estadoProyecto: proyecto.estadoProyecto,
+            fase:proyecto.fase
         }
     );
 
@@ -167,6 +168,7 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
                 nombre: infoNuevoProyecto.nombre,
                 nombreLider: infoNuevoProyecto.nombreLider,
                 estadoProyecto: infoNuevoProyecto.estadoProyecto,
+                fase:infoNuevoProyecto.fase
             },
             (response) => {
                 toast.success('Proyecto editado con éxito');
@@ -185,55 +187,68 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
     return (
         <tr>
             {edit ? (
-            <>
-                <td>{infoNuevoProyecto.codigoProyecto}
-                </td>
-                <td>
-                    <select name="descripcion" className="estilosCampos"
-                        defaultValue={infoNuevoProyecto.nombre}
-                        onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, descripcion: e.target.value })}>
-                        
-                    </select>
-                </td>
-                <td>
-                    
-                    <input name="lider" className="campoLider"
-                        defaultValue={infoNuevoProyecto.nombreLider}
-                        //required
-                        //controlar el componente con un solo estado (e = elemento que entra)
-                        //(...)spread operator
-                        onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, lider: e.target.value })} >
-                    </input>    
-                </td>
-                <td>
-                    <select name="estado" className="estilosCampos"
-                        //required
-                        defaultValue={infoNuevoProyecto.estadoProyecto}
-                        onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, estado: e.target.value })}>
-                        <option disabled value={0}> Selecciona un estado</option>
-                        <option>Activo</option>
-                        <option>Inactivo</option>
-                    </select>
-                </td>
-                <td>
-                    <button className="checkButton" onClick={actualizarProyecto}>
-                    <span className="material-icons">check</span></button> 
-                </td>
-                <td>
-                    <button className="cancelButton" onClick={()=>setEdit(!edit)}> 
-                    <span className="material-icons">cancel</span>
-                    </button>
-                </td>
+
+                <>
+                    <td>{infoNuevoProyecto.codigoProyecto}
+                    </td>
+                    <td className="estilosCampos">
+                        <input name="nombre" 
+                            defaultValue={infoNuevoProyecto.nombre}
+                            onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, descripcion: e.target.value })}>
+
+                        </input>
+                    </td>
+                    <td>
+
+                        <input name="lider" className="campoLider"
+                            defaultValue={infoNuevoProyecto.nombreLider}
+                            //required
+                            //controlar el componente con un solo estado (e = elemento que entra)
+                            //(...)spread operator
+                            onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, lider: e.target.value })} >
+                        </input>
+                    </td>
+                    <td>
+                        <select name="estado"   className="selector-edicion"
+                            //required
+                            defaultValue={infoNuevoProyecto.estadoProyecto}
+                            onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, estadoProyecto: e.target.value })}>
+                            <option disabled value={0}> Selecciona un estado</option>
+                            <option>Activo</option>
+                            <option>Inactivo</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="fase" className="selector-edicion"
+                            //required
+                            defaultValue={infoNuevoProyecto.fase}
+                            onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, fase: e.target.value })}>
+                            <option disabled value={0}> Selecciona una fase</option>
+                            <option>Iniciado</option>
+                            <option>En desarrollo</option>
+                            <option>Terminado</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button className="checkButton" onClick={actualizarProyecto}>
+                            <span className="material-icons">check</span></button>
+                    </td>
+                    <td>
+                        <button className="cancelButton" onClick={() => setEdit(!edit)}>
+                            <span className="material-icons">cancel</span>
+                        </button>
+                    </td>
                 </>
             ) : (
                 <>
-                <td>{proyecto.codigoProyecto}</td>
-                <td>{proyecto.nombre}</td>
-                <td>{proyecto.nombreLider}</td>
-                <td><label className={proyecto.estadoProyecto==='Disponible' ? 'badgeAvailable':'badgeNotAvailable'}>
-                    {proyecto.estadoProyecto}</label></td>
-                <td><button className="editButton" onClick={() => setEdit(true)}>
-                    <span className="material-icons">edit</span>
+                    <td>{proyecto.codigoProyecto}</td>
+                    <td>{proyecto.nombre}</td>
+                    <td>{proyecto.nombreLider}</td>
+                    <td><label className={proyecto.estadoProyecto === 'Activo' ? 'badgeAvailable' : 'badgeNotAvailable'}>
+                        {proyecto.estadoProyecto}</label></td>
+                    <td> {proyecto.fase}</td>
+                    <td><button className="editButton" onClick={() => setEdit(true)}>
+                        <span className="material-icons">edit</span>
                     </button>
                 </td>
                 <td></td>

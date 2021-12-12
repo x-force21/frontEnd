@@ -61,13 +61,32 @@ export const registrarProyectos = async (data, successCallback, errorCallback) =
 };
 
 export const editarProyectos = async ( data, successCallback, errorCallback) => {
-  const options = {
-    method: 'PATCH',
-    url: 'http://localhost:3001/proyectos/update/',
-    headers: { 'Content-Type': 'application/json' },
-    data,
-  };
-  await axios.request(options).then(successCallback).catch(errorCallback);
+
+  const mutation = `mutation
+  editProject($idProject:ID!, $projectStatus:EditProjectInput){   
+    editProject(_id:$idProject, input: $projectStatus) {
+      _id
+      codigoProyecto
+      nombre
+      objGenerales
+      objEspecificos
+      presupuesto
+      fInicio
+      fFinal
+      estadoProyecto
+      fase
+    }
+  }`
+
+  let varInputProject =
+  {"idProject":data._id,
+  "projectStatus": {
+  "estadoProyecto": data.estadoProyecto,
+  "fase":data.fase
+  }
+  }
+
+  await request('http://localhost:3001/api', mutation, varInputProject).then(successCallback);
 };
 
 /*---------USUARIOS-------------*/
