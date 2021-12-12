@@ -80,7 +80,8 @@ export const editarProyectos = async ( data, successCallback, errorCallback) => 
   let varInputProject =
   {"idProject":data._id,
   "projectStatus": {
-  "estadoProyecto": data.estadoProyecto
+  "estadoProyecto": data.estadoProyecto,
+  "fase":data.fase
   }
   }
 

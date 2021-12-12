@@ -337,6 +337,30 @@ tbody td {
     border-radius: 10px;
 }
 
+.estado{
+    width: 5%!important;
+}
+
+.estilosCampo2{
+    width: 10%!important;
+}
+
+.estilo-id-proy{
+    width: 5%!important;
+}
+
+.acciones{
+    width: 2%!important;
+}
+
+.selector-edicion {
+    width: 100%!important;
+}
+
+.estilo-campo-edicion {
+    width: 9%!important;
+}
+
 .campoLider{
     width: auto;
     height: 30px;
