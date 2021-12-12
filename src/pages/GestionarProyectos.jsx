@@ -115,7 +115,6 @@ const TablaProyectos = ({ listaProyectos, setEjecutarConsulta }) => {
                                 <th scope="col">ID Proyecto</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Lider</th>
-                                <th scope="col">Descripción</th>
                                 <th scope="col">Estado</th>
                                 <th scope="col">Acción</th>
                                 <th></th>
@@ -189,11 +188,11 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
                     <td>{infoNuevoProyecto.codigoProyecto}
                     </td>
                     <td>
-                        <select name="descripcion" className="estilosCampos"
+                        <input name="nombre" className="estilosCampos"
                             defaultValue={infoNuevoProyecto.nombre}
                             onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, descripcion: e.target.value })}>
 
-                        </select>
+                        </input>
                     </td>
                     <td>
 
@@ -209,7 +208,7 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
                         <select name="estado" className="estilosCampos"
                             //required
                             defaultValue={infoNuevoProyecto.estadoProyecto}
-                            onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, estado: e.target.value })}>
+                            onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, estadoProyecto: e.target.value })}>
                             <option disabled value={0}> Selecciona un estado</option>
                             <option>Activo</option>
                             <option>Inactivo</option>
