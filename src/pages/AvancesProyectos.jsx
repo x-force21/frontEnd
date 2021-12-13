@@ -3,22 +3,22 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { obtenerProyectos, registrarProyectos, editarProyectos} from '../utils/api';
+import { obtenerProyectosUser, registrarProyectos, editarProyectos} from '../utils/api';
 import { nanoid } from 'nanoid';
 
 
-const GestionarProyectos = () => {
+const AvancesProyectos = () => {
 
     const [proyectos, setProyectos] = useState([]);
     const [mostrarTablaProyectos, setMostrarTablaProyectos] = useState(true);
     const [textoBoton,setTextoBoton] = useState('Crear nuevo Proyecto');
-    const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
+    const [ejecutarConsulta, setEjecutarConsulta] = useState(true); 
     
     
     useEffect(() => {
         console.log('consulta', ejecutarConsulta);
         if (ejecutarConsulta) {
-            obtenerProyectos((response) => {
+            obtenerProyectosUser((response) => {
                 console.log('la respuesta que se recibio fue', response);
                 setProyectos(response.getProjects);
             },
@@ -40,7 +40,7 @@ const GestionarProyectos = () => {
 
     useEffect(() => {
         if (mostrarTablaProyectos) {
-            setTextoBoton('Crear nuevo Proyecto');
+            setTextoBoton('Agregar Avance');
         } else {   
             setTextoBoton('Volver a Gestionar Proyectos');
             //setColorBoton();
@@ -94,8 +94,8 @@ const TablaProyectos = ({ listaProyectos, setEjecutarConsulta }) => {
         <div>
             <Header/>
             <div className="textosInicioSeccion">
-            <div className="tituloSeccion">Gestionar proyectos</div>
-            <div className="descripcionSeccion">Aquí encuentras los proyectos, los actualizas o agregas nuevos.</div>
+            <div className="tituloSeccion">Mis Proyectos y Avances</div>
+            <div className="descripcionSeccion">Aquí encuentras tus proyectos y podras registrar avances.</div>
         </div>   
             <section>    
                 <ul className="posicionBuscador"> 
@@ -112,13 +112,12 @@ const TablaProyectos = ({ listaProyectos, setEjecutarConsulta }) => {
                         <caption></caption>
                             <thead>
                             <tr>
-                                <th scope="col" className="estilo-id-proy">ID Proyecto</th>
-                                <th scope="col" className="estilosCampo2">Nombre</th>
-                                <th scope="col" className="estilosCampo2">Lider</th>
-                                <th scope="col" className="estado">Estado</th>
-                                <th scope="col" className="estado">Fase</th>
-                                <th scope="col" className="acciones">Acción</th>
-                                <th className="acciones"></th>
+                                <th scope="col">ID Proyecto</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Lider</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Avances</th>
+                                <th></th>
                             </tr>
                             </thead>
                         <tbody>
@@ -152,7 +151,6 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
             nombre: proyecto.nombre,
             nombreLider: proyecto.nombreLider,
             estadoProyecto: proyecto.estadoProyecto,
-            fase:proyecto.fase
         }
     );
 
@@ -168,7 +166,6 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
                 nombre: infoNuevoProyecto.nombre,
                 nombreLider: infoNuevoProyecto.nombreLider,
                 estadoProyecto: infoNuevoProyecto.estadoProyecto,
-                fase:infoNuevoProyecto.fase
             },
             (response) => {
                 toast.success('Proyecto editado con éxito');
@@ -187,74 +184,58 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
     return (
         <tr>
             {edit ? (
-
-                <>
-                    <td>{infoNuevoProyecto.codigoProyecto}
-                    </td>
-                    <td className="estilosCampos">
-                        <input name="nombre" 
-                            defaultValue={infoNuevoProyecto.nombre}
-                            onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, descripcion: e.target.value })}>
-
-                        </input>
-                    </td>
-                    <td>
-
-                        <input name="lider" className="campoLider"
-                            defaultValue={infoNuevoProyecto.nombreLider}
-                            //required
-                            //controlar el componente con un solo estado (e = elemento que entra)
-                            //(...)spread operator
-                            onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, lider: e.target.value })} >
-                        </input>
-                    </td>
-                    <td>
-                        <select name="estado"   className="selector-edicion"
-                            //required
-                            defaultValue={infoNuevoProyecto.estadoProyecto}
-                            onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, estadoProyecto: e.target.value })}>
-                            <option disabled value={0}> Selecciona un estado</option>
-                            <option>Activo</option>
-                            <option>Inactivo</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select name="fase" className="selector-edicion"
-                            //required
-                            defaultValue={infoNuevoProyecto.fase}
-                            onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, fase: e.target.value })}>
-                            <option disabled value={0}> Selecciona una fase</option>
-                            <option>Iniciado</option>
-                            <option>En desarrollo</option>
-                            <option>Terminado</option>
-                        </select>
-                    </td>
-                    <td>
-                        <button className="checkButton" onClick={actualizarProyecto}>
-                            <span className="material-icons">check</span></button>
-                    </td>
-                    <td>
-                        <button className="cancelButton" onClick={() => setEdit(!edit)}>
-                            <span className="material-icons">cancel</span>
-                        </button>
-                    </td>
+            <>
+                <td>{infoNuevoProyecto.codigoProyecto}
+                </td>
+                <td>
+                    <select name="descripcion" className="estilosCampos"
+                        defaultValue={infoNuevoProyecto.nombre}
+                        onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, descripcion: e.target.value })}>
+                        
+                    </select>
+                </td>
+                <td>
+                    
+                    <input name="lider" className="campoLider"
+                        defaultValue={infoNuevoProyecto.nombreLider}
+                        //required
+                        //controlar el componente con un solo estado (e = elemento que entra)
+                        //(...)spread operator
+                        onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, lider: e.target.value })} >
+                    </input>    
+                </td>
+                <td>
+                    <select name="estado" className="estilosCampos"
+                        //required
+                        defaultValue={infoNuevoProyecto.estadoProyecto}
+                        onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, estado: e.target.value })}>
+                        <option disabled value={0}> Selecciona un estado</option>
+                        <option>Activo</option>
+                        <option>Inactivo</option>
+                    </select>
+                </td>
+                <td>
+                    <button className="checkButton" onClick={actualizarProyecto}>
+                    <span className="material-icons">check</span></button> 
+                </td>
+                <td>
+                    <button className="cancelButton" onClick={()=>setEdit(!edit)}> 
+                    <span className="material-icons">cancel</span>
+                    </button>
+                </td>
                 </>
             ) : (
                 <>
-                    <td>{proyecto.codigoProyecto}</td>
-                    <td>{proyecto.nombre}</td>
-                    <td>{proyecto.nombreLider}</td>
-                    <td><label className={proyecto.estadoProyecto === 'Activo' ? 'badgeAvailable' : 'badgeNotAvailable'}>
-                        {proyecto.estadoProyecto}</label></td>
-                    <td> {proyecto.fase}</td>
-                    <td><button className="editButton" onClick={() => setEdit(true)}>
-                        <span className="material-icons">edit</span>
-                    </button>
-                </td>
-                <td></td>
+                <td>{proyecto.codigoProyecto}</td>
+                <td>{proyecto.nombre}</td>
+                <td>{proyecto.nombreLider}</td>
+                <td>{proyecto.estadoProyecto}</td>
+                <td><button className="checkButton" onClick={()=>setEdit(true)}> 
+                        <span className="material-icon">Agregar</span></button></td>
+                    <td></td> 
             </>
-            )}
-            
+            )
+            }
         </tr>
     );
 };
@@ -339,4 +320,4 @@ const RegistrarProyectos = ({ setMostrarTablaProyectos, listaProyectos, setProye
     );
 };
 
-export default GestionarProyectos;
+export default AvancesProyectos;

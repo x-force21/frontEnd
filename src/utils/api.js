@@ -77,43 +77,133 @@ export const editarProyectos = async ( data, successCallback, errorCallback) => 
       fase
     }
   }`
-
+  
   let varInputProject =
   {"idProject":data._id,
   "projectStatus": {
   "estadoProyecto": data.estadoProyecto,
   "fase":data.fase
-  }
-  }
+}
+}
 
   await request('http://localhost:3001/api', mutation, varInputProject).then(successCallback);
 };
 
-/*---------USUARIOS-------------*/
+export const obtenerProyectosUser = async (successCallback, errorCallback) => {
+
+  const query = `
+  {getProjects {
+    _id
+    codigoProyecto
+    nombre
+    nombreLider
+    estadoProyecto
+  }}
+`
+await request('http://localhost:3001/api', query).then(successCallback);
+};
+
+/*---------Usuarios-------------*/
 
 export const obtenerUsuarios = async (successCallback, errorCallback) => {
-  const options = { method: 'GET',
-  url: 'http://localhost:3001/usuarios/' };
-  await axios.request(options).then(successCallback).catch(errorCallback);
-};
+
+  const query = `
+  {getUsers {
+    _id
+    nombre
+    apellido
+    email
+    contrasena
+    documentType
+    documentId
+    rol
+    estado
+  }}
+`
+await request('http://localhost:3001/api', query).then(successCallback);
+}; 
 
 export const registrarUsuarios = async (data, successCallback, errorCallback) => {
-  const options = {
-    method: 'POST',
-    url: 'http://localhost:3001/usuarios/create',
-    headers: { 'Content-Type': 'application/json' },
-    data,
-  };
-  await axios.request(options).then(successCallback).catch(errorCallback);
+  const mutation = `mutation
+  registerUser($UserInput:UserInput!){   
+    registerUser(input: $UserInput) {
+      nombre
+      apellido
+      email
+      contrasena
+      documentType
+      documentId
+      rol
+      estado
+    }
+  }`
+
+  let varInputUser =
+  {
+  "UserInput": {
+    "nombre": "Hola",
+    "apellido": "Mundo",
+    "email": "hola@mundo.com",
+    "contrasena": "homu123*",
+    "documentType": "CC",
+    "documentId": "123AA4566",
+    "rol": "estudiante",
+    "estado": "pendiente",
+  }
+}
+  
+  await request('http://localhost:3001/api', mutation, varInputUser).then(successCallback);
 };
 
+
 export const editarUsuarios = async ( data, successCallback, errorCallback) => {
-  const options = {
-    method: 'PATCH',
-    url: 'http://localhost:3001/usuarios/update/',
-    headers: { 'Content-Type': 'application/json' },
-    data,
-  };
-  await axios.request(options).then(successCallback).catch(errorCallback);
+  const mutation = `mutation
+  editUserInfo($userEditInput:UserEditInput!){   
+    editUserInfo((input: $userEditInput) {
+      _id
+      nombre
+      apellido
+      email
+      contrasena
+      documentId
+      estado
+    }
+  }`
+  
+  let varuserEditInput =
+    {
+      "userEditInput": {
+      "_id": data._id,
+      "nombre": "",
+      "apellido": "",
+      "email": "",
+      "contrasena": "",
+      "documentId": "",
+      "estado": "",
+      
+    }
+  }
+  await request('http://localhost:3001/api', mutation, varuserEditInput).then(successCallback);
 };
+
+export const editUserState = async ( data, successCallback, errorCallback) => {
+  const mutation = `mutation
+  editUserState($userStateInput:UserStateInput!){   
+    editUserState((input: $userStateInput) {
+      rol
+      estado
+    }
+  }`
+  
+  let varUserStateInput =
+    {
+      "rol": "Estudiante",
+      "estado": "Autorizado",
+      
+    }
+
+  await request('http://localhost:3001/api', mutation, varUserStateInput).then(successCallback);
+};
+
+/*---------Avances-------------*/
 
