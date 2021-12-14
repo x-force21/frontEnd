@@ -48,11 +48,12 @@ export const registrarProyectos = async (data, successCallback, errorCallback) =
     "nombre": data.nombre,
     "objGenerales": "mejorar cosas",
     "objEspecificos": "mejorar una cosa",
-    "presupuesto": Number(data.presupuesto),
-    "fInicio": data.fInicio,
-    "fFinal": data.fFinal,
+    "presupuesto": 80000,
+    "fInicio": "2021-12-01",
+    "fFinal": "2021-12-08",
     "nombreLider": data.lider,
-    "documentoLider": data.documentoLider
+    "documentoLider": "123456789",//data.documentoLider,
+    "estadoProyecto" : data.estadoProyecto
   }
 }
   
