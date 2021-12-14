@@ -3,11 +3,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { obtenerProyectos, registrarProyectos, editarProyectos} from '../utils/api';
+import { obtenerProyectoFiltrado, registrarProyectos, editarProyectos} from '../utils/api';
 import { nanoid } from 'nanoid';
 
 
-const GestionarProyectos = () => {
+const GestionarProyectosLider = () => {
 
     const [proyectos, setProyectos] = useState([]);
     const [mostrarTablaProyectos, setMostrarTablaProyectos] = useState(true);
@@ -18,9 +18,9 @@ const GestionarProyectos = () => {
     useEffect(() => {
         console.log('consulta', ejecutarConsulta);
         if (ejecutarConsulta) {
-            obtenerProyectos((response) => {
+            obtenerProyectoFiltrado((response) => {
                 console.log('la respuesta que se recibio fue', response);
-                setProyectos(response.getProjects);
+                setProyectos(response.getProjectsByFilter);
             },
             (error) => {
                 console.error('Salio un error:', error);
@@ -339,4 +339,4 @@ const RegistrarProyectos = ({ setMostrarTablaProyectos, listaProyectos, setProye
     );
 };
 
-export default GestionarProyectos;
+export default GestionarProyectosLider;

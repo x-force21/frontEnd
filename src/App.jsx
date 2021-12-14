@@ -5,6 +5,7 @@ import GestionarProyectos from './pages/GestionarProyectos';
 import GestionarUsuarios from './pages/GestionarUsuarios';
 import './styles/App.css'
 import RegistrarUsuario from './pages/RegistrarUsuario';
+import GestionarProyectosLider from './pages/GestionarProyectosLider'
 // import PrivateRoute from './components/PrivateRoute';
 
 
@@ -43,6 +44,10 @@ function App() {
 
          <Route path='/GestionarUsuarios'>
           <GestionarUsuarios />
+         </Route>
+
+         <Route path='/GestionarProyectosLider'>
+           <GestionarProyectosLider />
          </Route>
 
          <Route path='/'>

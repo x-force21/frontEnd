@@ -2,6 +2,25 @@ import axios from 'axios';
 import { request, GraphQLClient } from 'graphql-request';
 
 /*-------Proyectos------*/
+
+export const obtenerProyectoFiltrado = async (successCallback, errorCallback) => {
+
+  const query =` {
+	getProjectsByFilter(leaderDocument:"1001"){
+    _id
+    nombre
+    nombreLider
+    estadoProyecto
+    fase
+  }
+  }`
+
+
+await request('http://localhost:3001/api', query).then(successCallback);
+
+};
+
+
 export const obtenerProyectos = async (successCallback, errorCallback) => {
 
   const query = `
