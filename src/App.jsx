@@ -3,10 +3,10 @@ import Login from './pages/login';
 
 import GestionarProyectos from './pages/GestionarProyectos';
 import GestionarUsuarios from './pages/GestionarUsuarios';
-import './styles/App.css'
 import RegistrarUsuario from './pages/RegistrarUsuario';
 import Proyectos from './pages/Proyectos';
 import AvancesProyectos from './pages/AvancesProyectos';
+import './styles/App.css'
 // import PrivateRoute from './components/PrivateRoute';
 
 
@@ -37,7 +37,6 @@ function App() {
          <Route path='/RegistrarUsuario'>
           <RegistrarUsuario/>
          </Route>
-        
          
          <Route path='/GestionarProyectos'>
            <GestionarProyectos />

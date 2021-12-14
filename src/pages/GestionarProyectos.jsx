@@ -83,9 +83,9 @@ const TablaProyectos = ({ listaProyectos, setEjecutarConsulta }) => {
 
     useEffect(() => {
         setProyectosFiltrados(
-          listaProyectos.filter((elemento) => {
+            listaProyectos.filter((elemento) => {
             return JSON.stringify(elemento).toLowerCase().includes(busqueda.toLowerCase());
-          })
+            })
         );
 
     }, [busqueda, listaProyectos]);

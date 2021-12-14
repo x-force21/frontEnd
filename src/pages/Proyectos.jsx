@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { obtenerProyectosUser, registrarProyectos, editarProyectos} from '../utils/api';
+import { obtenerProyectos, registrarInscripcion, editarProyectos} from '../utils/api';
 import { nanoid } from 'nanoid';
 
 
@@ -11,14 +11,14 @@ const Proyectos = () => {
 
     const [proyectos, setProyectos] = useState([]);
     const [mostrarTablaProyectos, setMostrarTablaProyectos] = useState(true);
-    const [textoBoton,setTextoBoton] = useState('Crear nuevo Proyecto');
+    const [textoBoton,setTextoBoton] = useState('Inscripcion');
     const [ejecutarConsulta, setEjecutarConsulta] = useState(true); 
     
     
     useEffect(() => {
         console.log('consulta', ejecutarConsulta);
         if (ejecutarConsulta) {
-            obtenerProyectosUser((response) => {
+            obtenerProyectos((response) => {
                 console.log('la respuesta que se recibio fue', response);
                 setProyectos(response.getProjects);
             },
@@ -33,12 +33,22 @@ const Proyectos = () => {
         
     return (
         <div>
+            <div>
+                <button
+                onClick={() => {
+                    setMostrarTablaProyectos(!mostrarTablaProyectos)
+                }}
+                className="botonCrear">                
+                {textoBoton}
+                </button>
+            </div>
+
             {mostrarTablaProyectos ? (
             <TablaProyectos listaProyectos={proyectos} setEjecutarConsulta={setEjecutarConsulta}/>
             ) : (
-                <RegistrarProyectos
+                <RegistrarInscripcion
                     setMostrarTablaProyectos={setMostrarTablaProyectos}
-                    listaProyetcos={proyectos}
+                    listaProyectos={proyectos}
                     setProyectos={setProyectos}/>
                 )}
             <ToastContainer position='bottom-center' autoClose={5000} />
@@ -80,8 +90,8 @@ const TablaProyectos = ({ listaProyectos, setEjecutarConsulta }) => {
                         />
                     </li>
                 </ul>
-                <div className="proyectTable">
-                    <table summary="Proyectos registrados" className="usersTable">
+                <div className="productsTable">
+                    <table summary="Proyectos registrados">
                         <caption></caption>
                             <thead>
                             <tr>
@@ -89,7 +99,7 @@ const TablaProyectos = ({ listaProyectos, setEjecutarConsulta }) => {
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Lider</th>
                                 <th scope="col">Estado</th>
-                                <th scope="col">Inscribir</th>
+                                <th scope="col">Avances</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -203,7 +213,7 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
                 <td>{proyecto.nombre}</td>
                 <td>{proyecto.nombreLider}</td>
                 <td>{proyecto.estadoProyecto}</td>
-                <td><button className="checkButton" onClick={()=>setEdit(true)}> 
+                <td><button className="checkButton" onClick={()=>RegistrarInscripcion(true)}> 
                         <span className="material-icon">Agregar</span></button></td>
                     <td></td> 
             </>
@@ -216,7 +226,7 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
 
 /*------------ FORMULARIO Crear Nuevos proyectos --------------*/
 
-const RegistrarProyectos = ({ setMostrarTablaProyectos, listaProyectos, setProyectos}) => {
+const RegistrarInscripcion = ({ setMostrarTablaProyectos}) => {
     const form = useRef(null);
 
     //async trabaja con await axios    
@@ -225,26 +235,26 @@ const RegistrarProyectos = ({ setMostrarTablaProyectos, listaProyectos, setProye
         const fd = new FormData(form.current);
         
 
-        const nuevoProyecto = {};
+        const nuevoInscripcion = {};
         fd.forEach((value, key) => {
-            nuevoProyecto[key] = value;
+            nuevoInscripcion[key] = value;
         });
         //se define el método POST y la url 3001 (AQUÍ SE MUESTRAN DATOS)
-        await registrarProyectos(
+        await registrarInscripcion(
             {
-                codigoProyecto: nuevoProyecto.idProyecto,
-                nombre: nuevoProyecto.descripcion,
-                lider: nuevoProyecto.lider,
-                estadoProyecto: nuevoProyecto.estado,
+                userID: nuevoInscripcion.userID,
+                codigoProyecto: nuevoInscripcion.codigoProyecto,
+                inscripcionStatus: nuevoInscripcion.inscripcionStatus,
+                fechaIngreso: nuevoInscripcion.fechaIngreso, 
+                fechaEgreso: nuevoInscripcion.fechaEgreso,
             },
             (response) => {
               console.log(response.data);
-              toast.success('Nuevo proyecto agregado con éxito');
-              
+              toast.success('Te has registrado con exito en tu nuevo proyecto');
             },
             (error) => {
               console.error(error);
-              toast.error('Error agregando el proyecto');
+              toast.error('Error generando la inscripcion');
             }
           );
       
@@ -257,34 +267,29 @@ const RegistrarProyectos = ({ setMostrarTablaProyectos, listaProyectos, setProye
             <Header/>
             <div className="textosInicioSeccion">
             <div className="tituloSeccion">
-                <span>Agregar nuevo Proyecto</span>
+                <span>Agregar nueva Inscripcion</span>
                     </div>
-            <div className="descripcionSeccion">Ingresa los datos del nuevo Proyecto.</div>
+            <div className="descripcionSeccion">Ingresa los datos del proyecto en el que deseas participar</div>
         </div>
             <div className="contenedorFormulario">
             <form ref={form} onSubmit={submitForm} className='flex flex-col'>
+                
+                
+                <label htmlFor="UserID">User ID
+                    <input type="text" name="userID"
+                    placeholder="Ingresa user ID" required/>
+                    </label>
+                
+                    <label htmlFor="codigoProyecto">Codigo del Proyecto
+                    <input type="text" name="codigoProyecto"
+                    placeholder="Ingresa el codigo del proyecto" required/>
+                    </label>
 
-                <label htmlFor="id">ID de Proyecto
-                <input type="number" name="idProyecto"
-                placeholder="Ejemplo: 0001" required/>
-                </label>
-            
-                <label htmlFor="descripcionProyecto">Descripción del Proyecto
-                <input type= "text" name="descripcion"  ></input>
-                </label>
+                    <input id="inscripcionStatus" type="hidden" name="inscripcionStatus" value = "null" required/>
+                    <input id="fechaIngreso" type="hidden" name="fechaIngreso" value = "null" required/>
+                    <input id="fechaEgreso" type="hidden" name="fechaEgreso" value = "null" required/>
 
-                <label htmlFor="liderProyecto">lider Proyecto
-                <input type= "text" name="lider" ></input>
-                </label>
-            
-                <label htmlFor="estadoProyecto">Estado del Proyecto
-                    <select name="estado" required defaultValue={0} >
-                        <option disabled value={0}> Selecciona un estado</option>
-                        <option>Activo</option>
-                        <option>Inactivo</option>
-                    </select>
-                </label>
-                <button type="submit" className="botonGuardarUsuario"> Guardar nuevo Proyecto
+                <button type="submit" className="botonGuardarProyecto"> Guardar nuevo Proyecto
                 </button>
             </form>
             </div>

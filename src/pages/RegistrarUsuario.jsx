@@ -71,12 +71,12 @@ const RegistrarUsuario = () => {
 
                 
                     <label htmlFor="NombreUsuario">Nombres
-                    <input type="text" name="nombre"
+                    <input type="text" id="nombre" name="nombre"
                     placeholder="Ingresa nombre completo..." required/>
                     </label>
 
                     <label htmlFor="ApellidosUsuario">Apellidos
-                    <input type="text" name="apellido"
+                    <input type="text" id="apellido" name="apellido"
                     placeholder="Ingresa apellidos..." required/>
                     </label>
 

@@ -1,7 +1,26 @@
 import axios from 'axios';
 import { request, GraphQLClient } from 'graphql-request';
 
+
 /*-------Proyectos------*/
+
+export const obtenerProyectoFiltrado = async (successCallback, errorCallback) => {
+
+  const query =` {
+	getProjectsByFilter(leaderDocument:"1001"){
+    _id
+    nombre
+    nombreLider
+    estadoProyecto
+    fase
+  }
+  }`
+
+
+await request('http://localhost:3001/api', query).then(successCallback);
+
+};
+
 export const obtenerProyectos = async (successCallback, errorCallback) => {
 
   const query = `
@@ -48,12 +67,11 @@ export const registrarProyectos = async (data, successCallback, errorCallback) =
     "nombre": data.nombre,
     "objGenerales": "mejorar cosas",
     "objEspecificos": "mejorar una cosa",
-    "presupuesto": 80000,
-    "fInicio": "2021-12-01",
-    "fFinal": "2021-12-08",
+    "presupuesto": Number(data.presupuesto),
+    "fInicio": data.fInicio,
+    "fFinal": data.fFinal,
     "nombreLider": data.lider,
-    "documentoLider": "123456789",//data.documentoLider,
-    "estadoProyecto" : data.estadoProyecto
+    "documentoLider": data.documentoLider
   }
 }
   
@@ -77,30 +95,16 @@ export const editarProyectos = async ( data, successCallback, errorCallback) => 
       fase
     }
   }`
-  
+
   let varInputProject =
   {"idProject":data._id,
   "projectStatus": {
   "estadoProyecto": data.estadoProyecto,
   "fase":data.fase
-}
-}
+  }
+  }
 
   await request('http://localhost:3001/api', mutation, varInputProject).then(successCallback);
-};
-
-export const obtenerProyectosUser = async (successCallback, errorCallback) => {
-
-  const query = `
-  {getProjects {
-    _id
-    codigoProyecto
-    nombre
-    nombreLider
-    estadoProyecto
-  }}
-`
-await request('http://localhost:3001/api', query).then(successCallback);
 };
 
 /*---------Usuarios-------------*/
@@ -125,8 +129,8 @@ await request('http://localhost:3001/api', query).then(successCallback);
 
 export const registrarUsuarios = async (data, successCallback, errorCallback) => {
   const mutation = `mutation
-  registerUser($UserInput:UserInput!){   
-    registerUser(input: $UserInput) {
+  registerUser($userInput:UserInput!){   
+    registerUser(input: $userInput) {
       nombre
       apellido
       email
@@ -138,28 +142,14 @@ export const registrarUsuarios = async (data, successCallback, errorCallback) =>
     }
   }`
 
-  let varInputUser =
-  {
-  "UserInput": {
-    "nombre": "Hola",
-    "apellido": "Mundo",
-    "email": "hola@mundo.com",
-    "contrasena": "homu123*",
-    "documentType": "CC",
-    "documentId": "123AA4566",
-    "rol": "estudiante",
-    "estado": "pendiente",
-  }
-}
-  
-  await request('http://localhost:3001/api', mutation, varInputUser).then(successCallback);
+  await request('http://localhost:3001/api', mutation).then(successCallback);
 };
 
 
 export const editarUsuarios = async ( data, successCallback, errorCallback) => {
   const mutation = `mutation
   editUserInfo($userEditInput:UserEditInput!){   
-    editUserInfo((input: $userEditInput) {
+    editUserInfo(input: $userEditInput) {
       _id
       nombre
       apellido
@@ -207,25 +197,17 @@ export const editUserState = async ( data, successCallback, errorCallback) => {
 
 /*---------Avances-------------*/
 
-export const inscriptionProject = async ( data, successCallback, errorCallback) => {
+export const registrarInscripcion = async ( data, successCallback, errorCallback) => {
   const mutation = `mutation
-  inscriptionProject($inscriptionsInput:InscriptionsInput!){   
-    inscriptionProject((input: $inscriptionsInput) {
+  inscriptionProject ($InscriptionsInput:InscriptionsInput!){   
+    inscriptionProject(input:$InscriptionsInput) {
       UserID
       codigoProyecto
-      estadoInscription
+      inscripcionStatus
       fechaIngreso
       fechaEgreso
     }
   }`
   
-  let varinscriptionsInput =
-    {
-      "inscriptionsInput": {
-      "_id": data._id,
-      "codigoProyecto": "ING0001",
-      "estadoInscription": "",
-    }
-  }
-  await request('http://localhost:3001/api', mutation, varinscriptionsInput).then(successCallback);
+  await request('http://localhost:3001/api', mutation).then(successCallback);
 };

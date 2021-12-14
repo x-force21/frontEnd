@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { obtenerProyectosUser, registrarProyectos, editarProyectos} from '../utils/api';
+import { obtenerProyectos, registrarProyectos, editarProyectos} from '../utils/api';
 import { nanoid } from 'nanoid';
 
 
@@ -18,7 +18,7 @@ const AvancesProyectos = () => {
     useEffect(() => {
         console.log('consulta', ejecutarConsulta);
         if (ejecutarConsulta) {
-            obtenerProyectosUser((response) => {
+            obtenerProyectos((response) => {
                 console.log('la respuesta que se recibio fue', response);
                 setProyectos(response.getProjects);
             },
