@@ -207,3 +207,25 @@ export const editUserState = async ( data, successCallback, errorCallback) => {
 
 /*---------Avances-------------*/
 
+export const inscriptionProject = async ( data, successCallback, errorCallback) => {
+  const mutation = `mutation
+  inscriptionProject($inscriptionsInput:InscriptionsInput!){   
+    inscriptionProject((input: $inscriptionsInput) {
+      UserID
+      codigoProyecto
+      estadoInscription
+      fechaIngreso
+      fechaEgreso
+    }
+  }`
+  
+  let varinscriptionsInput =
+    {
+      "inscriptionsInput": {
+      "_id": data._id,
+      "codigoProyecto": "ING0001",
+      "estadoInscription": "",
+    }
+  }
+  await request('http://localhost:3001/api', mutation, varinscriptionsInput).then(successCallback);
+};
