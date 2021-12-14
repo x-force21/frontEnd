@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { obtenerProyectosUser, registrarProyectos, inscriptionProject} from '../utils/api';
+import { obtenerProyectosUser, registrarProyectos, editarProyectos} from '../utils/api';
 import { nanoid } from 'nanoid';
 
 
@@ -38,7 +38,7 @@ const Proyectos = () => {
             ) : (
                 <RegistrarProyectos
                     setMostrarTablaProyectos={setMostrarTablaProyectos}
-                    listaProyectos={proyectos}
+                    listaProyetcos={proyectos}
                     setProyectos={setProyectos}/>
                 )}
             <ToastContainer position='bottom-center' autoClose={5000} />
@@ -115,35 +115,38 @@ const TablaProyectos = ({ listaProyectos, setEjecutarConsulta }) => {
 
 /*------------ Fila Proyectos - donde se pueden editar --------------*/
 
-const FilaProyecto = ({ usuario, proyecto, inscription, setEjecutarConsulta }) => {
+const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
     
     const [edit, setEdit] = useState(false);
-    const [infoNuevaInscription, setInfoNuevaInscription] = useState(
+    const [infoNuevoProyecto, setInfoNuevoProyecto] = useState(
         {
-            _id: usuario._id,
             codigoProyecto: proyecto.codigoProyecto,
-            estadoInscription: inscription.estadoInscription
+            nombre: proyecto.nombre,
+            nombreLider: proyecto.nombreLider,
+            estadoProyecto: proyecto.estadoProyecto,
         }
     );
 
-    const generarInscripcion = async () => {
+    const actualizarProyecto = async () => {
     //enviar la info al back y se define el método POST con import axios de utils/api
     //async trabaja con await axios
     //enviar la info al back
     
-        await inscriptionProject(
+        await editarProyectos(
             {    
-                _id: usuario._id,
-                codigoProyecto: infoNuevaInscription.codigoProyecto,
-                estadoInscription: infoNuevaInscription.estadoInscription
+                _id: proyecto._id,
+                codigoProyecto: infoNuevoProyecto.codigoProyecto,
+                nombre: infoNuevoProyecto.nombre,
+                nombreLider: infoNuevoProyecto.nombreLider,
+                estadoProyecto: infoNuevoProyecto.estadoProyecto,
             },
             (response) => {
-                toast.success('Inscripcion éxitosa');
+                toast.success('Proyecto editado con éxito');
                 setEdit(false);
                 setEjecutarConsulta(true);
             },
             (error) => {
-                toast.error('Error con inscripcion');
+                toast.error('Error editando el Proyecto');
                 console.error(error);
             }
         );
@@ -155,37 +158,37 @@ const FilaProyecto = ({ usuario, proyecto, inscription, setEjecutarConsulta }) =
         <tr>
             {edit ? (
             <>
-                <td>{infoNuevaInscription.codigoProyecto}
+                <td>{infoNuevoProyecto.codigoProyecto}
                 </td>
                 <td>
                     <select name="descripcion" className="estilosCampos"
-                        defaultValue={infoNuevaInscription.estado}
-                        onChange={(e) => setInfoNuevaInscription({ ...infoNuevaInscription, descripcion: e.target.value })}>
+                        defaultValue={infoNuevoProyecto.nombre}
+                        onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, descripcion: e.target.value })}>
                         
                     </select>
                 </td>
                 <td>
                     
                     <input name="lider" className="campoLider"
-                        defaultValue={infoNuevaInscription.nombreLider}
+                        defaultValue={infoNuevoProyecto.nombreLider}
                         //required
                         //controlar el componente con un solo estado (e = elemento que entra)
                         //(...)spread operator
-                        onChange={(e) => setInfoNuevaInscription({ ...infoNuevaInscription, lider: e.target.value })} >
+                        onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, lider: e.target.value })} >
                     </input>    
                 </td>
                 <td>
                     <select name="estado" className="estilosCampos"
                         //required
-                        defaultValue={infoNuevaInscription.estadoProyecto}
-                        onChange={(e) => setInfoNuevaInscription({ ...infoNuevaInscription, estado: e.target.value })}>
+                        defaultValue={infoNuevoProyecto.estadoProyecto}
+                        onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, estado: e.target.value })}>
                         <option disabled value={0}> Selecciona un estado</option>
                         <option>Activo</option>
                         <option>Inactivo</option>
                     </select>
                 </td>
                 <td>
-                    <button className="checkButton" onClick={generarInscripcion}>
+                    <button className="checkButton" onClick={actualizarProyecto}>
                     <span className="material-icons">check</span></button> 
                 </td>
                 <td>
@@ -201,7 +204,7 @@ const FilaProyecto = ({ usuario, proyecto, inscription, setEjecutarConsulta }) =
                 <td>{proyecto.nombreLider}</td>
                 <td>{proyecto.estadoProyecto}</td>
                 <td><button className="checkButton" onClick={()=>setEdit(true)}> 
-                        <span className="material-icon">Inscribir</span></button></td>
+                        <span className="material-icon">Agregar</span></button></td>
                     <td></td> 
             </>
             )
