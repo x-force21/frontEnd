@@ -3,13 +3,6 @@ import Login from './pages/login';
 
 import GestionarProyectos from './pages/GestionarProyectos';
 import GestionarUsuarios from './pages/GestionarUsuarios';
-<<<<<<< Updated upstream
-=======
-import RegistrarUsuario from './pages/RegistrarUsuario';
-import GestionarInscripcion from './pages/gestionarInscripcion'
-import Proyectos from './pages/Proyectos';
-import AvancesProyectos from './pages/AvancesProyectos';
->>>>>>> Stashed changes
 import './styles/App.css'
 import RegistrarUsuario from './pages/RegistrarUsuario';
 import GestionarProyectosLider from './pages/GestionarProyectosLider'
@@ -56,13 +49,7 @@ function App() {
          <Route path='/GestionarProyectosLider'>
            <GestionarProyectosLider />
          </Route>
-
-<<<<<<< Updated upstream
-         <Route path='/gestionarInscripcion'>
-          <GestionarInscripcion />
-         </Route>      
-=======
->>>>>>> Stashed changes
+    
 
          <Route path='/'>
           <Login />
