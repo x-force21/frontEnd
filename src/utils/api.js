@@ -8,11 +8,25 @@ export const obtenerProyectoFiltrado = async (successCallback, errorCallback) =>
 
   const query =` {
 	getProjectsByFilter(leaderDocument:"1001"){
-    _id
+    codigoProyecto
     nombre
     nombreLider
     estadoProyecto
     fase
+  }
+  }`
+
+
+await request('http://localhost:3001/api', query).then(successCallback);
+
+};
+
+export const obtenerProyectoFiltradoEstudiante = async (successCallback, errorCallback) => {
+
+  const query =` 
+  {getProject(id:"61a98ed645ee0c7319a693c8"){
+    codigoProyecto
+    nombre
   }
   }`
 

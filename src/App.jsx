@@ -6,6 +6,8 @@ import GestionarUsuarios from './pages/GestionarUsuarios';
 import RegistrarUsuario from './pages/RegistrarUsuario';
 import Proyectos from './pages/Proyectos';
 import AvancesProyectos from './pages/AvancesProyectos';
+import GestionarProyectosLider from './pages/GestionarProyectosLider';
+import GestionarProyectosEstudiante from './pages/GestionarProyectosEstudiante';
 import './styles/App.css'
 // import PrivateRoute from './components/PrivateRoute';
 
@@ -52,6 +54,14 @@ function App() {
 
          <Route path='/Avances'>
           <AvancesProyectos />
+         </Route>
+         
+         <Route path='/GestionarProyectosLider'>
+         <GestionarProyectosLider />
+         </Route>
+
+         <Route path='/GestionarProyectosEstudiante'>
+          <GestionarProyectosEstudiante />
          </Route>
 
          <Route path='/'>
