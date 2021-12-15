@@ -12,6 +12,9 @@ export const obtenerProyectoFiltrado = async (successCallback, errorCallback) =>
     nombreLider
     estadoProyecto
     fase
+    objGenerales
+    objEspecificos
+    presupuesto
   }
   }`
 
@@ -106,6 +109,37 @@ export const editarProyectos = async ( data, successCallback, errorCallback) => 
   await request('http://localhost:3001/api', mutation, varInputProject).then(successCallback);
 };
 
+export const editarProyectosLider = async ( data, successCallback, errorCallback) => {
+
+  const mutation = `mutation
+  editProject($idProject:ID!, $projectStatus:EditProjectInput){   
+    editProject(_id:$idProject, input: $projectStatus) {
+      _id
+      codigoProyecto
+      nombre
+      objGenerales
+      objEspecificos
+      presupuesto
+      fInicio
+      fFinal
+      estadoProyecto
+      fase
+    }
+  }`
+
+  let varInputProject =
+  {"idProject":data._id,
+  "projectStatus": {
+  "estadoProyecto": data.estadoProyecto,
+  "fase":data.fase,
+  "objGenerales": data.objGenerales,
+  "objEspecificos": data.objEspecificos,
+  "presupuesto":Number(data.presupuesto)
+  }
+  }
+
+  await request('http://localhost:3001/api', mutation, varInputProject).then(successCallback);
+};
 /*---------USUARIOS-------------*/
 
 export const obtenerUsuariosFiltrado = async (successCallback, errorCallback) => {

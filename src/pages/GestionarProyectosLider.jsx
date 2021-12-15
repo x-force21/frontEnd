@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { obtenerProyectoFiltrado, registrarProyectos, editarProyectos} from '../utils/api';
+import { obtenerProyectoFiltrado, registrarProyectos, editarProyectosLider } from '../utils/api';
 import { nanoid } from 'nanoid';
 
 
@@ -115,8 +115,11 @@ const TablaProyectos = ({ listaProyectos, setEjecutarConsulta }) => {
                                 <th scope="col" className="estilo-id-proy">ID Proyecto</th>
                                 <th scope="col" className="estilosCampo2">Nombre</th>
                                 <th scope="col" className="estilosCampo2">Lider</th>
+                                <th scope="col" className="estado">Presupuesto</th>
                                 <th scope="col" className="estado">Estado</th>
                                 <th scope="col" className="estado">Fase</th>
+                                <th scope="col" className="estado">Objetivos generales</th>
+                                <th scope="col" className="estado">Objetivos espec&iacute;ficos</th>
                                 <th scope="col" className="acciones">Acción</th>
                                 <th className="acciones"></th>
                             </tr>
@@ -152,7 +155,10 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
             nombre: proyecto.nombre,
             nombreLider: proyecto.nombreLider,
             estadoProyecto: proyecto.estadoProyecto,
-            fase:proyecto.fase
+            fase:proyecto.fase,
+            objGenerales: proyecto.objGenerales,
+            objEspecificos: proyecto.objEspecificos,
+            presupuesto: proyecto.presupuesto
         }
     );
 
@@ -161,14 +167,17 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
     //async trabaja con await axios
     //enviar la info al back
     
-        await editarProyectos(
+        await editarProyectosLider(
             {    
                 _id: proyecto._id,
                 codigoProyecto: infoNuevoProyecto.codigoProyecto,
                 nombre: infoNuevoProyecto.nombre,
                 nombreLider: infoNuevoProyecto.nombreLider,
                 estadoProyecto: infoNuevoProyecto.estadoProyecto,
-                fase:infoNuevoProyecto.fase
+                fase:infoNuevoProyecto.fase,
+                objGenerales: infoNuevoProyecto.objGenerales,
+                objEspecificos: infoNuevoProyecto.objEspecificos,
+                presupuesto: infoNuevoProyecto.presupuesto
             },
             (response) => {
                 toast.success('Proyecto editado con éxito');
@@ -198,6 +207,7 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
 
                         </input>
                     </td>
+
                     <td>
 
                         <input name="lider" className="campoLider"
@@ -206,6 +216,13 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
                             //controlar el componente con un solo estado (e = elemento que entra)
                             //(...)spread operator
                             onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, lider: e.target.value })} >
+                        </input>
+                    </td>
+                    <td >
+                        <input name="presupuesto"  className="presupuesto"
+                            defaultValue={infoNuevoProyecto.presupuesto}
+                            onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, presupuesto: e.target.value })}>
+
                         </input>
                     </td>
                     <td>
@@ -229,6 +246,19 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
                             <option>Terminado</option>
                         </select>
                     </td>
+                    <td  className="justify">
+
+                        <textarea name="objGenerales" className="objetivos" 
+                            defaultValue={infoNuevoProyecto.objGenerales}
+                            onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, objGenerales: e.target.value })} >
+                        </textarea>
+                        </td>
+                    <td>
+                    <textarea  name="objEspecificos" className="objetivos"
+                        defaultValue={infoNuevoProyecto.objEspecificos}
+                        onChange={(e) => setInfoNuevoProyecto({ ...infoNuevoProyecto, objEspecificos: e.target.value })} >
+                    </textarea >
+                    </td>
                     <td>
                         <button className="checkButton" onClick={actualizarProyecto}>
                             <span className="material-icons">check</span></button>
@@ -244,9 +274,12 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
                     <td>{proyecto.codigoProyecto}</td>
                     <td>{proyecto.nombre}</td>
                     <td>{proyecto.nombreLider}</td>
+                    <td>{proyecto.presupuesto}</td>
                     <td><label className={proyecto.estadoProyecto === 'Activo' ? 'badgeAvailable' : 'badgeNotAvailable'}>
                         {proyecto.estadoProyecto}</label></td>
                     <td> {proyecto.fase}</td>
+                    <td> {proyecto.objGenerales}</td>
+                    <td> {proyecto.objEspecificos}</td>
                     <td><button className="editButton" onClick={() => setEdit(true)}>
                         <span className="material-icons">edit</span>
                     </button>
