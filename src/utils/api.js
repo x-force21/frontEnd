@@ -15,7 +15,6 @@ export const obtenerProyectoFiltrado = async (successCallback, errorCallback) =>
   }
   }`
 
-
 await request('http://localhost:3001/api', query).then(successCallback);
 
 };
@@ -109,9 +108,31 @@ export const editarProyectos = async ( data, successCallback, errorCallback) => 
 
 /*---------USUARIOS-------------*/
 
+export const obtenerUsuariosFiltrado = async (successCallback, errorCallback) => {
+
+  const query =`
+  getUsers {
+    _id
+    nombre
+    apellido
+    email
+    contrasena
+    documentType
+    documentId
+    rol
+    estado
+	}
+  }
+  `
+
+await request('http://localhost:3001/api', query).then(successCallback);
+
+};
+
+
 export const obtenerUsuarios = async (successCallback, errorCallback) => {
   const options = { method: 'GET',
-  url: 'http://localhost:3001/usuarios/' };
+  url: 'http://localhost:3001/api/usuarios/' };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 

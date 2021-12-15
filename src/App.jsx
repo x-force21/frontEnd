@@ -57,9 +57,12 @@ function App() {
            <GestionarProyectosLider />
          </Route>
 
+<<<<<<< Updated upstream
          <Route path='/gestionarInscripcion'>
           <GestionarInscripcion />
          </Route>      
+=======
+>>>>>>> Stashed changes
 
          <Route path='/'>
           <Login />
