@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { request, GraphQLClient } from 'graphql-request';
-const backendAppDomain = 'https://xforceappb.herokuapp.com';
+const backendAppDomain = 'https://xforceappbhk.herokuapp.com';
 /*-------Proyectos------*/
 
 export const obtenerProyectoFiltrado = async (successCallback, errorCallback) => {
