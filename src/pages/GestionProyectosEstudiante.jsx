@@ -3,13 +3,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { obtenerProyectos, registrarProyectos, editarProyectos} from '../utils/api';
+import { obtenerProyectoFiltradoEstudiante, registrarProyectos, editarProyectos} from '../utils/api';
 import { nanoid } from 'nanoid';
 
 
-const GestionarProyectos = () => {
+const GestionarProyectosEstudiante = () => {
 
-    const [proyectos, setProyectos] = useState([]);
+     const [proyectos, setProyectos] = useState([]);
     const [mostrarTablaProyectos, setMostrarTablaProyectos] = useState(true);
     const [textoBoton,setTextoBoton] = useState('Crear nuevo Proyecto');
     const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
@@ -18,9 +18,9 @@ const GestionarProyectos = () => {
     useEffect(() => {
         console.log('consulta', ejecutarConsulta);
         if (ejecutarConsulta) {
-            obtenerProyectos((response) => {
+            obtenerProyectoFiltradoEstudiante((response) => {
                 console.log('la respuesta que se recibio fue', response);
-                setProyectos(response.getProjects);
+                setProyectos(response.getProject);
             },
             (error) => {
                 console.error('Salio un error:', error);
@@ -108,7 +108,7 @@ const TablaProyectos = ({ listaProyectos, setEjecutarConsulta }) => {
                     </li>
                 </ul>
                 <div className="proyectTable">
-                    <table summary="Proyectos registrados">
+                    <table summary="Proyectos registrados" className="usersTable">
                         <caption></caption>
                             <thead>
                             <tr>
@@ -244,8 +244,7 @@ const FilaProyecto = ({ proyecto, setEjecutarConsulta }) => {
                     <td>{proyecto.codigoProyecto}</td>
                     <td>{proyecto.nombre}</td>
                     <td>{proyecto.nombreLider}</td>
-                    <td><label className={proyecto.estadoProyecto === 'Activo' ? 'badgeAvailable' : 'badgeNotAvailable'}>
-                        {proyecto.estadoProyecto}</label></td>
+                    <td>{proyecto.estadoProyecto}</td>
                     <td> {proyecto.fase}</td>
                     <td><button className="editButton" onClick={() => setEdit(true)}>
                         <span className="material-icons">edit</span>
@@ -339,4 +338,4 @@ const RegistrarProyectos = ({ setMostrarTablaProyectos, listaProyectos, setProye
     );
 };
 
-export default GestionarProyectos;
+export default GestionarProyectosEstudiante;
