@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { request, GraphQLClient } from 'graphql-request';
-
+const backendAppDomain = 'https://xforceappb.herokuapp.com/';
 /*-------Proyectos------*/
 
 export const obtenerProyectoFiltrado = async (successCallback, errorCallback) => {
@@ -18,7 +18,7 @@ export const obtenerProyectoFiltrado = async (successCallback, errorCallback) =>
   }
   }`
 
-await request('http://localhost:3001/api', query).then(successCallback);
+await request(`${backendAppDomain}/api`, query).then(successCallback);
 
 };
 
@@ -41,7 +41,7 @@ export const obtenerProyectos = async (successCallback, errorCallback) => {
     documentoLider
   }}
 `
-await request('http://localhost:3001/api', query).then(successCallback);
+await request(`${backendAppDomain}/api`, query).then(successCallback);
 
 };
 
@@ -77,7 +77,7 @@ export const registrarProyectos = async (data, successCallback, errorCallback) =
   }
 }
   
-  await request('http://localhost:3001/api', mutation, varInputProject).then(successCallback);
+  await request(`${backendAppDomain}/api`, mutation, varInputProject).then(successCallback);
 };
 
 export const editarProyectos = async ( data, successCallback, errorCallback) => {
@@ -106,7 +106,7 @@ export const editarProyectos = async ( data, successCallback, errorCallback) => 
   }
   }
 
-  await request('http://localhost:3001/api', mutation, varInputProject).then(successCallback);
+  await request(`${backendAppDomain}/api`, mutation, varInputProject).then(successCallback);
 };
 
 export const editarProyectosLider = async ( data, successCallback, errorCallback) => {
@@ -138,7 +138,7 @@ export const editarProyectosLider = async ( data, successCallback, errorCallback
   }
   }
 
-  await request('http://localhost:3001/api', mutation, varInputProject).then(successCallback);
+  await request(`${backendAppDomain}/api`, mutation, varInputProject).then(successCallback);
 };
 /*---------USUARIOS-------------*/
 
@@ -159,7 +159,7 @@ export const obtenerUsuariosFiltrado = async (successCallback, errorCallback) =>
   }
   `
 
-await request('http://localhost:3001/api', query).then(successCallback);
+await request(`${backendAppDomain}/api`, query).then(successCallback);
 
 };
 
