@@ -28,8 +28,6 @@ jobs:
         npx webpack
         npm run build
         npm test
-        
-    - name: Build and Push Docker Image
     - uses: gonuit/heroku-docker-deploy@v1.3.3
       with:
         email: ${{ secrets.HEROKU_EMAIL }}
