@@ -12,8 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
-        os: [ubuntu-latest, windows-latest, macOs-latest]
+        node-version: [12.x, 14.x, 15.x, 16.x]
     
     steps:
     - uses: actions/checkout@v2
@@ -27,3 +26,16 @@ jobs:
       run: |
         npm install
         npx webpack
+        npm run build
+        npm test
+        
+        - uses: gonuit/heroku-docker-deploy@v1.3.3
+        with:
+        email: ${{ secrets.HEROKU_EMAIL }}
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+        # (Optionals you can find more information on the README file)
+        dockerfile_directory: ./
+        dockerfile_name: Dockerfile
+        docker_options: "--no-cache"
+        process_type: web
