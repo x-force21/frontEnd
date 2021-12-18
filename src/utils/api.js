@@ -245,6 +245,7 @@ export const editUserState = async ( data, successCallback, errorCallback) => {
 
 /*---------Avances-------------*/
 
+
 export const registrarInscripcion = async ( data, successCallback, errorCallback) => {
   const mutation = `mutation
   inscriptionProject ($InscriptionsInput:InscriptionsInput!){   
