@@ -49,8 +49,15 @@ function App() {
          <Route path='/GestionarProyectosLider'>
            <GestionarProyectosLider />
          </Route>
-    
 
+         <Route path='/Proyectos'>
+          <Proyectos />
+         </Route>
+
+         <Route path='/GestionarProyectosEstudiante'>
+          <GestionarProyectosEstudiante />
+         </Route>
+    
          <Route path='/'>
           <Login />
          </Route>

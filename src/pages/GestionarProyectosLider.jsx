@@ -107,7 +107,7 @@ const TablaProyectos = ({ listaProyectos, setEjecutarConsulta }) => {
                         />
                     </li>
                 </ul>
-                <div className="productsTable">
+                <div className="proyectTable">
                     <table summary="Proyectos registrados">
                         <caption></caption>
                             <thead>
