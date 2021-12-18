@@ -6,6 +6,8 @@ import GestionarUsuarios from './pages/GestionarUsuarios';
 import './styles/App.css'
 import RegistrarUsuario from './pages/RegistrarUsuario';
 import GestionarProyectosLider from './pages/GestionarProyectosLider'
+import Proyectos from './pages/Proyectos'
+import GestionarProyectosEstudiante from './pages/GestionarProyectosEstudiante'
 // import PrivateRoute from './components/PrivateRoute';
 
 
