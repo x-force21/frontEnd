@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { request, GraphQLClient } from 'graphql-request';
+import { request } from 'graphql-request';
 
 /*-------Proyectos------*/
 
