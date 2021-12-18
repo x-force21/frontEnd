@@ -7,7 +7,7 @@ import './styles/App.css'
 import RegistrarUsuario from './pages/RegistrarUsuario';
 import GestionarProyectosLider from './pages/GestionarProyectosLider'
 import Proyectos from './pages/Proyectos'
-import GestionarProyectosEstudiante from './pages/GestionarProyectosEstudiante'
+import GestionarProyectosEstudiante from './pages/GestionProyectosEstudiante'
 // import PrivateRoute from './components/PrivateRoute';
 
 
