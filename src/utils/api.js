@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { request, GraphQLClient } from 'graphql-request';
+import { request } from 'graphql-request';
 
 /*-------Proyectos------*/
 
@@ -245,6 +244,7 @@ export const editUserState = async ( data, successCallback, errorCallback) => {
 };
 
 /*---------Avances-------------*/
+
 
 export const registrarInscripcion = async ( data, successCallback, errorCallback) => {
   const mutation = `mutation

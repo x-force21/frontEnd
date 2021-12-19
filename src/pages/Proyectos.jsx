@@ -29,6 +29,23 @@ const Proyectos = () => {
             setEjecutarConsulta(false); 
         }
     }, [ejecutarConsulta]);
+
+    //obtener lista desde el back 
+    useEffect(() => {
+        if (mostrarTablaProyectos) {
+            setEjecutarConsulta(true);
+        }
+    }, [mostrarTablaProyectos]);
+
+    useEffect(() => {
+        if (mostrarTablaProyectos) {
+            setTextoBoton('Inscripciones');
+        } else {   
+            setTextoBoton('Volver a Proyectos');
+            //setColorBoton();
+        }
+    }, [mostrarTablaProyectos]);
+
     
         
     return (
@@ -90,7 +107,7 @@ const TablaProyectos = ({ listaProyectos, setEjecutarConsulta }) => {
                         />
                     </li>
                 </ul>
-                <div className="proyectTable">
+                <div className="productsTable">
                     <table summary="Proyectos registrados">
                         <caption></caption>
                             <thead>

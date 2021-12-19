@@ -37,6 +37,15 @@ const GestionarUsuarios = () => {
             }
         }, [mostrarTablaUsuarios]);
 
+        useEffect(() => {
+            if (mostrarTablaUsuarios) {
+                setTextoBoton('Crear nuevo usuario');
+            } else {   
+                setTextoBoton('Volver a Gestionar Usuarios');
+                //setColorBoton();
+            }
+        }, [mostrarTablaUsuarios]);
+
 
         return (
             <div>

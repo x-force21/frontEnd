@@ -2,9 +2,7 @@ import {registrarUsuarios} from '../utils/api';
 import React, {useRef} from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import GestionarUsuarios from './GestionarUsuarios';
 import { Link } from "react-router-dom";
-import { nanoid } from 'nanoid';
 
 /*------------ FORMULARIO Crear Nuevos Usuarios --------------*/
 const RegistrarUsuario = () => {
