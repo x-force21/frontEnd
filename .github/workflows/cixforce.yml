@@ -22,11 +22,9 @@ jobs:
         with:
           args: --acl public-read --follow-symlinks --delete
         env:
-          heroku_app_name: xforceappf
-          email: rubenchod22@gmail.com
-          heroku_api_key: 87cf199e-ca38-4638-ae5f-dbc052261bfa
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           # (Optionals)
-          dockerfile_directory: algo aqui #NO estoy segura como va esto
-          dockerfile_name: Dockerfile
-          docker_options: "--no-cache"
+
           process_type: web
