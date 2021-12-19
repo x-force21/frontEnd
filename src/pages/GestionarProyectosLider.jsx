@@ -15,6 +15,7 @@ const GestionarProyectosLider = () => {
     const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
     
     
+    
     useEffect(() => {
         console.log('consulta', ejecutarConsulta);
         if (ejecutarConsulta) {
