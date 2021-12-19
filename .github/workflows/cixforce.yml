@@ -23,7 +23,7 @@ jobs:
           args: --acl public-read --follow-symlinks --delete
         env:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-          email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           # (Optionals)
           dockerfile_directory: algo aqui #NO estoy segura como va esto
