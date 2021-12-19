@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v1
       - run: npm install
       - run: npm run build
-      - uses: x-force21/frontEnd@v3.12.12
+      - uses: x-force21/heroku-deploy@v3.12.12
         with:
           args: --acl public-read --follow-symlinks --delete
         env:
