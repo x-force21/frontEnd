@@ -32,7 +32,7 @@ export const obtenerProyectoFiltradoEstudiante = async (successCallback, errorCa
   }`
 
 
-await request('http://localhost:3001/api', query).then(successCallback);
+await request(`${backendAppDomain}/api`, query).then(successCallback);
 
 };
 
@@ -159,6 +159,7 @@ export const editarProyectosLider = async ( data, successCallback, errorCallback
 export const obtenerUsuarios = async (successCallback, errorCallback) => {
 
   const query =`
+  {
   getUsers {
     _id
     nombre
@@ -192,7 +193,7 @@ export const registrarUsuarios = async (data, successCallback, errorCallback) =>
     }
   }`
 
-  await request('http://localhost:3001/api', mutation).then(successCallback);
+  await request(`${backendAppDomain}/api`, mutation).then(successCallback);
 };
 
 export const editarUsuarios = async ( data, successCallback, errorCallback) => {
@@ -222,7 +223,7 @@ export const editarUsuarios = async ( data, successCallback, errorCallback) => {
       
     }
   }
-  await request('http://localhost:3001/api', mutation, varuserEditInput).then(successCallback);
+  await request(`${backendAppDomain}/api`, mutation, varuserEditInput).then(successCallback);
 };
 
 export const editUserState = async ( data, successCallback, errorCallback) => {
@@ -241,7 +242,7 @@ export const editUserState = async ( data, successCallback, errorCallback) => {
       
     }
 
-  await request('http://localhost:3001/api', mutation, varUserStateInput).then(successCallback);
+  await request(`${backendAppDomain}/api`, mutation, varUserStateInput).then(successCallback);
 };
 
 /*---------Avances-------------*/
@@ -258,6 +259,6 @@ export const registrarInscripcion = async ( data, successCallback, errorCallback
     }
   }`
   
-  await request('http://localhost:3001/api', mutation).then(successCallback);
+  await request(`${backendAppDomain}/api`, mutation).then(successCallback);
 };
 
